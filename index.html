@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>倒计时</title>
+        <style type="text/css">
+            html {
+                height: 100%;
+            }
+            body {
+                /* width: 100%; */
+                background: url(https://cdn.pixabay.com/photo/2020/05/20/00/45/time-5193038_1280.jpg) no-repeat top;
+                background-size: cover;
+            }
+            .time-item {
+                width: 450px;
+                height: 45px;
+                margin: 0 auto;
+            }
+
+            .time-item strong {
+                background: orange;
+                color: #fff;
+                line-height: 49px;
+                font-size: 36px;
+                font-family: Arial;
+                padding: 0 10px;
+                margin-right: 10px;
+                border-radius: 5px;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            }
+
+            .time-item > span {
+                float: left;
+                line-height: 49px;
+                color: orange;
+                font-size: 36px;
+                font-weight: 700;
+                margin: 0 10px;
+                padding-left: 13px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            .title {
+                width: 500px;
+                /* height: 50px; */
+                margin: 300px auto 50px;
+                font-size: 50px;
+                text-align: center;
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 class="title">距离见到你，还有</h1>
+
+        <div class="time-item">
+            <span><span id="day">00</span>天</span>
+            <strong><span id="hour">00</span>时</strong>
+            <strong><span id="minute">00</span>分</strong>
+            <strong><span id="second">00</span>秒</strong>
+        </div>
+        <script>
+            var day = document.querySelector('#day');
+            var hour = document.querySelector('#hour');
+            var minute = document.querySelector('#minute');
+            var second = document.querySelector('#second');
+            var inputTime = +new Date('2020-10-1 23:00:00'); // 返回的是用户输入时间总的毫秒数
+            fn();
+            setInterval(fn, 1000);
+            function fn() {
+                var newTime = +new Date(); // 当前时间毫秒值
+                var userTime = +new Date(inputTime); // 用户输入的时间毫秒值
+                var shenyuTime = (userTime - newTime) / 1000;
+                var d = parseInt(shenyuTime / 60 / 60 / 24); //  计算天数
+                d = d < 10 ? '0' + d : d;
+                day.innerHTML = d;
+                var h = parseInt((shenyuTime / 60 / 60) % 24); //   计算小时
+                h = h < 10 ? '0' + h : h;
+                hour.innerHTML = h;
+                var m = parseInt((shenyuTime / 60) % 60); //   计算分数
+                m = m < 10 ? '0' + m : m;
+                minute.innerHTML = m;
+                var s = parseInt(shenyuTime % 60); //   计算当前秒数
+                s = s < 10 ? '0' + s : s;
+                second.innerHTML = s;
+                // div.innerHTML = '距离光棍节还剩下' + d + '天' + h + '时' + m + '分' + s + '秒';
+            }
+        </script>
+    </body>
+</html>
